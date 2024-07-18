@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Silicon_BlazorApp", "Silicon_BlazorApp\Silicon_BlazorApp\Silicon_BlazorApp.csproj", "{3CABDCFB-948C-4963-A161-0C9F76E15269}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Silicon_BlazorApp", "Silicon_BlazorApp\Silicon_BlazorApp\Silicon_BlazorApp.csproj", "{3CABDCFB-948C-4963-A161-0C9F76E15269}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Silicon_BlazorApp.Client", "Silicon_BlazorApp\Silicon_BlazorApp.Client\Silicon_BlazorApp.Client.csproj", "{2418E0FB-0288-4E0A-B515-7D8F826F4491}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Silicon_BlazorApp.Client", "Silicon_BlazorApp\Silicon_BlazorApp.Client\Silicon_BlazorApp.Client.csproj", "{2418E0FB-0288-4E0A-B515-7D8F826F4491}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

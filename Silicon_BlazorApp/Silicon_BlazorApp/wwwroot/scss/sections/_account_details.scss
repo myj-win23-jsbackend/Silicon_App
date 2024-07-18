@@ -1,0 +1,55 @@
+﻿.account-details {
+    .container {
+        aside {
+            // Stilar för 'aside' elementet
+        }
+
+        .content {
+            .alert {
+                // Stilar för alert-meddelanden
+            }
+
+            .form-basic {
+                h5 {
+                    
+                }
+
+                .form-content {
+                    // Stilar för innehållet inom .form-basic
+
+                    .input-group {
+                        // Stilar för input-grupper
+                    }
+
+                    #form-firstname {
+                        // Stilar för element med id "form-firstname"
+                    }
+                }
+
+                .form-button {
+                    // Stilar för knapparna inom .form-basic
+                }
+            }
+
+            .form-address {
+                // Stilar för formuläret för adressinformation
+
+                .form-content {
+                    // Stilar för innehållet inom .form-address
+
+                    .input-group {
+                        // Stilar för input-grupper
+                    }
+
+                    #form-addressline-1 {
+                        // Stilar för element med id "form-addressline-1"
+                    }
+                }
+
+                .form-button {
+                    // Stilar för knapparna inom .form-address
+                }
+            }
+        }
+    }
+}

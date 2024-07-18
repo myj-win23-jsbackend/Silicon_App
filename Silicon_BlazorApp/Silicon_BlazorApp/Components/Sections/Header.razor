@@ -1,0 +1,54 @@
+﻿<header>
+    <div class="container">
+        <div class="silicon-logo">
+            <a href="">
+                <img src="/images/logos/sillicons-logo.svg" alt="Sillicon">
+            </a>
+            <nav class="nav-bar">
+                <NavLink href="" Match="NavLinkMatch.All">Overview</NavLink>
+                <NavLink href="/#features">Features</NavLink>
+
+                <AuthorizeView>
+                    <Authorized>
+                        <a href="/courses">Courses</a>
+                    </Authorized>
+                </AuthorizeView>
+
+
+
+                <NavLink href="/contacts">Contact</NavLink>
+                <i class="fa-solid fa-bars-staggered"></i>
+            </nav>
+        </div>
+        <div class="right-side">
+            <div class="toggle-box">
+                <p>Light</p>
+                <i class="fa-sharp fa-light fa-brightness"></i>
+                <input type="checkbox" id="check">
+                <label for="check" class="button">
+                </label>
+                <p>Dark</p>
+                <i class="fa-regular fa-moon"></i>
+            </div>
+            <div class="account-buttons">
+
+                <AuthorizeView>
+                    <Authorized>
+                        <div class="profile">
+                            <div class="profile-image">
+                                <a href="/account/details">
+                                    <img src="/images/uploads/profiles/avatar.jpg" />
+                                </a>
+                            </div>
+                        </div>
+                    </Authorized>
+                    <NotAuthorized>
+                        <a class="sign-in-btn" href="/signin"><i class="fa-regular fa-arrow-right-to-bracket"></i>Sign in</a>
+                        <a class="sign-up-btn" href="/signup"><i class="fa-regular fa-user"></i>Sign up</a>
+                    </NotAuthorized>
+                </AuthorizeView>
+
+            </div>
+        </div>
+    </div>
+</header>
