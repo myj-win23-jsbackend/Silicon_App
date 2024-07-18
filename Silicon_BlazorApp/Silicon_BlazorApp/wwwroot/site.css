@@ -938,24 +938,268 @@ header .container .right-side .profile-image img {
   background-color: black;
 }
 
-.signUp {
+.signup {
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: left;
 }
-.signUp H1 {
+.signup h1 {
   color: #0B0F19;
   font-weight: 900;
   font-size: 40px;
   font-family: "Manrope", sans-serif;
   margin-bottom: 1rem;
 }
-.signUp p {
+.signup p {
   font-family: "Manrope", sans-serif;
   color: #0B0F19;
   margin-bottom: 1rem;
 }
+.profile-notifications {
+  margin-top: 5rem;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+}
+.profile-notifications .container {
+  padding-left: 13%;
+  padding-right: 13%;
+  flex-wrap: wrap;
+}
+.profile-notifications .container .profile-info {
+  width: 350px;
+  border-right: 2px solid #E2E5F1;
+  height: 100%;
+  margin-top: 12px;
+}
+.profile-notifications .container .profile-info .profile-image-changer {
+  display: flex;
+  justify-content: center;
+}
+.profile-notifications .container .profile-info .profile-image-changer img {
+  position: relative;
+  width: 100px;
+  height: auto;
+  border-radius: 50%;
+  border: 1px solid #E2E5F1;
+}
+.profile-notifications .container .profile-info .profile-image-changer .image-changer {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid #E2E5F1;
+  display: grid;
+  place-items: center;
+  margin-top: 65px;
+  margin-left: 65px;
+  background-color: #fff;
+  transition: transform 0.8s ease;
+}
+.profile-notifications .container .profile-info .profile-image-changer .image-changer:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+  background-color: #bdbee7;
+}
+.profile-notifications .container .profile-info .profile-image-changer .image-changer i {
+  color: #33354D;
+  font-size: 14px;
+}
+.profile-notifications .container .profile-info .profile-name-email {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.profile-notifications .container .profile-info .profile-name-email h5 {
+  color: #0B0F19;
+  font-weight: 900;
+  font-size: 20px;
+  font-family: "manrope";
+  margin-bottom: 10px;
+}
+.profile-notifications .container .profile-info .profile-name-email #profile-email {
+  color: #565973;
+  font-weight: 700;
+  font-size: 16px;
+  font-family: "manrope";
+  margin-top: 0;
+}
+.profile-notifications .container .profile-info .logged-in-navbar {
+  margin-top: 40px;
+}
+.profile-notifications .container .profile-info .logged-in-navbar .navbar-menu {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: none;
+  background-color: transparent;
+  justify-content: flex-start;
+  width: 95%;
+  padding-right: 90px;
+  box-sizing: border-box;
+  margin: 2px;
+}
+.profile-notifications .container .profile-info .logged-in-navbar .navbar-menu:hover {
+  background-color: #bdbee7;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.profile-notifications .container .profile-info .logged-in-navbar .navbar-menu:hover i {
+  color: #fff;
+}
+.profile-notifications .container .profile-info .logged-in-navbar .navbar-menu:hover p {
+  color: #33354D;
+  font-family: "manrope";
+}
+.profile-notifications .container .profile-info .logged-in-navbar .navbar-menu i {
+  color: #9397AD;
+  margin-left: 20px;
+}
+.profile-notifications .container .profile-info .logged-in-navbar .navbar-menu p {
+  color: #33354D;
+  font-weight: 800;
+  font-size: 16px;
+  font-family: "manrope";
+}
+.profile-notifications .container .profile-info .logged-in-navbar #blue-button-background {
+  background-color: #6366F1;
+  border-radius: 8px;
+  box-shadow: 0 10px 8px rgba(0, 0, 0, 0.15);
+}
+.profile-notifications .container .profile-info .logged-in-navbar #blue-button-background i {
+  color: #fff;
+}
+.profile-notifications .container .profile-info .logged-in-navbar #blue-button-background p {
+  color: #fff;
+  font-weight: 800;
+  font-family: "manrope";
+}
+.profile-notifications .container .email-notifications {
+  margin-left: 8rem;
+  flex: 1;
+}
+.profile-notifications .container .email-notifications h2 {
+  font-family: "manrope";
+}
+.profile-notifications .container .email-notifications .user-email p {
+  font-family: "manrope";
+}
+.profile-notifications .container .email-notifications .user-email form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.profile-notifications .container .email-notifications .user-email form input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border: 1px solid #E2E5F1;
+  border-radius: 4px;
+  font-family: "manrope";
+  font-size: 16px;
+}
+.profile-notifications .container .email-notifications .toggle-box {
+  display: flex;
+  margin-top: 3rem;
+  margin-bottom: -4rem;
+  align-items: center;
+}
+@media (min-width: 1575px) {
+  .profile-notifications .container .email-notifications .toggle-box {
+    position: relative;
+    margin-right: 4rem;
+    gap: 1rem;
+  }
+}
+.profile-notifications .container .email-notifications .toggle-box .toggle-description {
+  margin-top: 12px;
+}
+.profile-notifications .container .email-notifications .toggle-box .toggle-description h6 {
+  color: #0B0F19;
+}
+@media (min-width: 1575px) {
+  .profile-notifications .container .email-notifications .toggle-box .toggle-description h6 {
+    display: block;
+    margin-bottom: 0px;
+    font-size: 16px;
+    font-family: "Manrope", sans-serif;
+    font-weight: 900;
+  }
+}
+.profile-notifications .container .email-notifications .toggle-box .toggle-description p {
+  color: #9397AD;
+}
+@media (min-width: 1575px) {
+  .profile-notifications .container .email-notifications .toggle-box .toggle-description p {
+    display: block;
+    font-size: 14px;
+    font-family: "Manrope", sans-serif;
+    font-weight: 600;
+  }
+}
+.profile-notifications .container .email-notifications .toggle-box #check1 {
+  display: none;
+  position: relative;
+}
+.profile-notifications .container .email-notifications .toggle-box #check2 {
+  display: none;
+  position: relative;
+}
+.profile-notifications .container .email-notifications .toggle-box .button {
+  background-color: #B4B7C9;
+  width: 40px;
+  height: 20px;
+  margin-top: 0.2rem;
+  border-radius: 200px;
+  cursor: pointer;
+  box-shadow: 0 8px 12px rgba(54, 59, 122, 0.199);
+}
+.profile-notifications .container .email-notifications .toggle-box .button::before {
+  position: absolute;
+  content: "";
+  background-color: #fff;
+  width: 18px;
+  height: 18px;
+  border-radius: 200px;
+  margin: 1px;
+}
+.profile-notifications .container .email-notifications .toggle-box input:checked + .button {
+  background-color: #22C55E;
+}
+.profile-notifications .container .email-notifications .toggle-box input:checked + .button::before {
+  transform: translateX(-20px);
+  transform: translateX(20px);
+}
+@media (min-width: 1575px) {
+  .profile-notifications .container .email-notifications .save-cancel-btn {
+    margin-top: 20rem;
+  }
+}
+.profile-notifications .container .email-notifications .save-cancel-btn button {
+  color: #33354D;
+  background-color: #EFF2FC;
+  border: none;
+  border-radius: 6px;
+  padding: 18px 40px;
+  margin-right: 1rem;
+}
+.profile-notifications .container .email-notifications .save-cancel-btn button:hover {
+  cursor: pointer;
+  background-color: #bdbee7;
+}
+.profile-notifications .container .email-notifications .save-cancel-btn #save {
+  color: #fff;
+  background-color: #6366F1;
+  border: none;
+  border-radius: 6px;
+  padding: 18px 45px;
+}
+.profile-notifications .container .email-notifications .save-cancel-btn #save:hover {
+  cursor: pointer;
+  background-color: #bdbee7;
+}
+
 #blazor-error-ui {
   background: lightyellow;
   bottom: 0;

@@ -2,5 +2,9 @@
   {
     "outputFile": "wwwroot/site.css",
     "inputFile": "wwwroot/site.scss"
+  },
+  {
+    "outputFile": "wwwroot/scss/sections/_notification.css",
+    "inputFile": "wwwroot/scss/sections/_notification.scss"
   }
 ]
