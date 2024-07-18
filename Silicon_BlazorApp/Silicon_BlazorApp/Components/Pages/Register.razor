@@ -19,10 +19,10 @@
 <section class="signUp">
     <div class="container">
 
-        @if (!string.IsNullOrEmpty(ViewData["StatusMessage"]?.ToString()))
+        @if (!string.IsNullOrEmpty(ErrorMessage))
         {
             <div class="alert alert-danger">
-                @ViewData["StatusMessage"]
+                @ErrorMessage
             </div>
         }
 
@@ -68,9 +68,8 @@
                 </div>
                 <div id="form-checkbox" class="checkbox-group">
                     <div class="input-group">
-                        <label>Terms & Conditions</label>
                         <InputCheckbox @bind-Value="Input.TermsAndConditions" class="form-control" autocomplete="terms" aria-required="true" />
-                        
+                        <label>I accept the Terms and Conditions</label>
                     </div>
                     <ValidationMessage For="() => Input.TermsAndConditions" />
                 </div>
@@ -88,6 +87,9 @@
 
 
 @code {
+
+    private string? ErrorMessage { get; set; }
+
     [SupplyParameterFromForm]
     private InputModel Input { get; set; } = new();
 
@@ -130,7 +132,7 @@
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
-        [RegularExpression(@"=^[\w-\.]+@([\w-]+\.)+[\w-]{2,}$", ErrorMessage = "Incorrect email format.")]
+        [RegularExpression(@"^[\w-\.]+@([\w-]+\.)+[\w-]{2,}$", ErrorMessage = "Incorrect email format.")]
         public string Email { get; set; } = "";
 
         [Required]
