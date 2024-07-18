@@ -6,6 +6,7 @@
 @using Microsoft.AspNetCore.Identity
 @using Microsoft.AspNetCore.WebUtilities
 @using Silicon_BlazorApp.Data
+@using Silicon_BlazorApp.Filters
 
 @inject UserManager<ApplicationUser> UserManager
 @inject SignInManager<ApplicationUser> SignInManager
@@ -46,31 +47,32 @@
 
 
                 <div id="form-lastname" class="input-group">
-                    <label asp-for="LastName"></label>
-                    <input asp-for="LastName" />
-                    <span asp-validation-for="LastName"></span>
+                    <label>Last name</label>
+                    <InputText @bind-Value="Input.LastName" class="form-control" autocomplete="surname" aria-required="true" placeholder="Enter your last name" />
+                    <ValidationMessage For="() => Input.LastName" />
                 </div>
                 <div id="form-email" class="input-group">
-                    <label asp-for="Email"></label>
-                    <input asp-for="Email" />
-                    <span asp-validation-for="Email"></span>
+                    <label>Email</label>
+                    <InputText type="email" @bind-Value="Input.Email" class="form-control" autocomplete="email" aria-required="true" placeholder="Enter your email" />
+                    <ValidationMessage For="() => Input.Email" />
                 </div>
                 <div id="form-password" class="input-group">
-                    <label asp-for="Password"></label>
-                    <input asp-for="Password" />
-                    <span asp-validation-for="Password"></span>
+                    <label>Password</label>
+                    <InputText type="password" @bind-Value="Input.Password" class="form-control" autocomplete="password" aria-required="true" placeholder="Enter your password" />
+                    <ValidationMessage For="() => Input.Password" />
                 </div>
                 <div id="form-confirmpassword" class="input-group">
-                    <label asp-for="ConfirmPassword"></label>
-                    <input asp-for="ConfirmPassword" />
-                    <span asp-validation-for="ConfirmPassword"></span>
+                    <label>Confirm password</label>
+                    <InputText type="password" @bind-Value="Input.ConfirmPassword" class="form-control" autocomplete="confirm" aria-required="true" placeholder="Confirm your password" />
+                    <ValidationMessage For="() => Input.ConfirmPassword" />
                 </div>
                 <div id="form-checkbox" class="checkbox-group">
                     <div class="input-group">
-                        <input asp-for="TermsAndConditions" />
-                        <label asp-for="TermsAndConditions"></label>
+                        <label>Terms & Conditions</label>
+                        <InputCheckbox @bind-Value="Input.TermsAndConditions" class="form-control" autocomplete="terms" aria-required="true" />
+                        
                     </div>
-                    <span asp-validation-for="TermsAndConditions"></span>
+                    <ValidationMessage For="() => Input.TermsAndConditions" />
                 </div>
                 <div id="form-button">
                     <button type="submit" class="btn btn-theme">Sign up</button>
@@ -128,10 +130,11 @@
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
+        [RegularExpression(@"=^[\w-\.]+@([\w-]+\.)+[\w-]{2,}$", ErrorMessage = "Incorrect email format.")]
         public string Email { get; set; } = "";
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+        [RegularExpression(@"^(?=.*[a-z])(?=.*?[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,}$", ErrorMessage = "Incorrect password format.")]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; } = "";
@@ -140,5 +143,9 @@
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; } = "";
+
+        [CheckboxRequired]
+        [Display(Name = "Terms & Conditions.")]
+        public bool TermsAndConditions { get; set; }
     }
 }
