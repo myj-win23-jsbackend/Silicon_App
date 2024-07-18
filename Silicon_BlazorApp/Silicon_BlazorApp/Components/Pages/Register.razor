@@ -99,7 +99,13 @@
     public async Task RegisterUser(EditContext editContext)
     {
 
-        var user = new ApplicationUser { UserName = Input.Email, Email = Input.Email };
+        var user = new ApplicationUser 
+        { 
+            FirstName = Input.FirstName,
+            LastName = Input.LastName,
+            UserName = Input.Email, 
+            Email = Input.Email 
+        };
 
         var result = await UserManager.CreateAsync(user, Input.Password);
 
