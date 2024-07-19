@@ -24,6 +24,14 @@ a:hover {
   text-decoration: underline;
 }
 
+.field-validation-error,
+.validation-message {
+  font-size: 14px;
+  font-weight: 400 !important;
+  color: #ff0000;
+  padding: 2px 5px;
+}
+
 .courses .container .title-form-div {
   display: flex;
   align-items: center;
