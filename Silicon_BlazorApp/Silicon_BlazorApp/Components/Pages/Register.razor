@@ -41,11 +41,6 @@
                     <InputText @bind-Value="Input.FirstName" class="form-control" autocomplete="givenname" aria-required="true" placeholder="Enter your first name" />
                     <ValidationMessage For="() => Input.FirstName" />
                 </div>
-
-
-
-
-
                 <div id="form-lastname" class="input-group">
                     <label>Last name</label>
                     <InputText @bind-Value="Input.LastName" class="form-control" autocomplete="surname" aria-required="true" placeholder="Enter your last name" />
@@ -74,7 +69,7 @@
                     <ValidationMessage For="() => Input.TermsAndConditions" />
                 </div>
                 <div id="form-button">
-                    <button type="submit" class="btn btn-theme">Sign up</button>
+                    <button type="submit" class="btn btn-theme"><i class="fa-regular fa-arrow-right-to-bracket"></i>Sign up</button>
                 </div>
             </div>
         </EditForm>
