@@ -35,6 +35,15 @@ builder.Services.AddIdentityCore<ApplicationUser>(options => options.SignIn.Requ
     .AddSignInManager()
     .AddDefaultTokenProviders();
 
+//Redirects the user to the sign in page if user is trying to access a page that requires the user to be signed in.
+builder.Services.ConfigureApplicationCookie(x =>
+{
+    x.LoginPath = "/signin";
+    x.Cookie.HttpOnly = true;
+    x.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+    x.ExpireTimeSpan = TimeSpan.FromHours(1);
+    x.SlidingExpiration = true;
+});
 
 var app = builder.Build();
 
