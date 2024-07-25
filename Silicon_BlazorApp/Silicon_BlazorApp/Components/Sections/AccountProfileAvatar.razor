@@ -1,65 +1,98 @@
-﻿
-<AuthorizeView>
-    <Authorized>
+﻿@page "/account-profile"
+@using System.Net.Http
+@using System.Net.Http.Headers
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.Identity
+@using Silicon_BlazorApp.Data
 
-        <section class="account-profile">
-            <div class="profile">
-                <div class="profile-image">
-                    <img src="/images/uploads/profiles/@user.ProfileImage" alt="@user.FirstName @user.LastName" />
+<section class="account-profile">
+    <div class="profile">
+        <div class="profile-image">
+            <img src="/images/uploads/profiles/@user.ProfileImage" alt="@user.FirstName @user.LastName" />
 
-                    <EditForm enctype="multipart/form-data" method="post" Model="" FormName="ProfileUpload" OnValidSubmit="HandleProfileUpload">
-                        <InputFile id="fileUploader" hidden />
-                        <label for="fileUploader" class="btn btn-circle btn-circle-sm"><i class="fa-regular fa-refresh"></i></label>
-                    </EditForm>
-                </div>
-                <div class="profile-info">
-                    <h3 class="displayname">@user.FirstName @user.LastName</h3>
-                    <p>@user.Email</p>
-                </div>
-            </div>
-        </section>
-    </Authorized>
-</AuthorizeView>
-
-
+            <EditForm Model="user" enctype="multipart/form-data" method="post" OnValidSubmit="HandleProfileUpload">
+                <InputFile id="fileUploader" OnChange="HandleFileSelected" hidden />
+                <label for="fileUploader" class="btn btn-circle btn-circle-sm">
+                    <i class="fa-regular fa-refresh"></i>
+                </label>
+            </EditForm>
+        </div>
+        <div class="profile-info">
+            <h3 class="displayname">@user.FirstName @user.LastName</h3>
+            <p>@user.Email</p>
+        </div>
+    </div>
+</section>
 
 @code {
     private ApplicationUser user = new ApplicationUser();
-    private MultipartFormDataContent uploadModel = new MultipartFormDataContent();
     private IBrowserFile? selectedFile;
 
+    [Inject]
+    private UserManager<ApplicationUser> UserManagerService { get; set; } = default!;
+    [Inject]
+    private IHttpClientFactory HttpClientFactory { get; set; } = default!;
+    [Inject]
+    private AuthenticationStateProvider AuthenticationStateProvider { get; set; } = default!;
     [CascadingParameter]
-    private HttpContext HttpContext { get; set; } = default!;
+    private Task<AuthenticationState> AuthenticationStateTask { get; set; } = default!;
 
     protected override async Task OnInitializedAsync()
     {
         await LoadUserDataAsync();
     }
 
+    private async Task LoadUserDataAsync()
+    {
+        var authState = await AuthenticationStateTask;
+        var userIdentity = authState.User.Identity;
+
+        if (userIdentity?.IsAuthenticated ?? false)
+        {
+            this.user = await UserManagerService.GetUserAsync(authState.User) ?? new ApplicationUser();
+        }
+    }
+
     private void HandleFileSelected(InputFileChangeEventArgs e)
     {
         selectedFile = e.File;
+        StateHasChanged(); // Force a re-render to reflect the selected file
     }
 
-    private async Task LoadUserDataAsync()
-    {
-        user = await UserManager.GetUserAsync(HttpContext.User) ?? null!;
-    }
-
-    public async Task HandleProfileUpload()
+    private async Task HandleProfileUpload()
     {
         if (selectedFile != null)
         {
+            var httpClient = HttpClientFactory.CreateClient();
             using var content = new MultipartFormDataContent();
             using var fileContent = new StreamContent(selectedFile.OpenReadStream(maxAllowedSize: 1024 * 1024 * 15)); // Max 15 MB
             fileContent.Headers.ContentType = new MediaTypeHeaderValue(selectedFile.ContentType);
             content.Add(fileContent, "file", selectedFile.Name);
 
-            var response = await httpClient.PostAsync("https://fileprovider-win23jsbackend-myj.azurewebsites.net/api/upload", content);
-            if (response.IsSuccessStatusCode)
+            try
             {
-                await LoadUserDataAsync();
-                StateHasChanged();
+                var response = await httpClient.PostAsync("https://fileprovider-win23jsbackend-myj.azurewebsites.net/api/upload", content);
+                if (response.IsSuccessStatusCode)
+                {
+                    // Assuming the response contains the updated profile image URL
+                    var updatedImageUrl = await response.Content.ReadAsStringAsync(); // Adjust if the API returns something different
+                    user.ProfileImage = updatedImageUrl;
+
+                    await UserManagerService.UpdateAsync(user);
+                    await LoadUserDataAsync();
+                    StateHasChanged();
+                }
+                else
+                {
+                    // Handle unsuccessful upload
+                    Console.WriteLine("Upload failed with status code: " + response.StatusCode);
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle exception
+                Console.WriteLine("An error occurred: " + ex.Message);
             }
         }
     }

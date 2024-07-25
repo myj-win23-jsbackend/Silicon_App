@@ -71,4 +71,5 @@ app.MapRazorComponents<App>()
     .AddAdditionalAssemblies(typeof(Silicon_BlazorApp.Client._Imports).Assembly);
 
 
+
 app.Run();
