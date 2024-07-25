@@ -11,5 +11,9 @@
 @using Silicon_BlazorApp.Client
 @using Silicon_BlazorApp.Components
 @using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Identity
+@using Silicon_BlazorApp.Data
 
 @inject HttpClient Http
+@inject UserManager<ApplicationUser> UserManager
+@inject SignInManager<ApplicationUser> SignInManager
