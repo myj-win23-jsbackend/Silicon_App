@@ -3,10 +3,11 @@
 @using System.ComponentModel.DataAnnotations
 @using Microsoft.AspNetCore.Identity
 @using Silicon_BlazorApp.Data
+@using Microsoft.EntityFrameworkCore
 
 @inject UserManager<ApplicationUser> UserManager
 @inject SignInManager<ApplicationUser> SignInManager
-
+@inject ApplicationDbContext DbContext
 
 <PageTitle>Profile</PageTitle>
 
@@ -29,7 +30,6 @@
         </EditForm>
     </div>
 </div>
-
 @code {
     private ApplicationUser user = default!;
     private string? username;
@@ -43,11 +43,23 @@
 
     protected override async Task OnInitializedAsync()
     {
+        // Hämta den inloggade användaren
         user = await UserManager.GetUserAsync(HttpContext.User) ?? null!;
         username = await UserManager.GetUserNameAsync(user);
         phoneNumber = await UserManager.GetPhoneNumberAsync(user);
 
         Input.PhoneNumber ??= phoneNumber;
+
+        // Hämta användarens adress från databasen (om det finns en relation)
+        if (user.AddressId.HasValue)
+        {
+            var address = await DbContext.Addresses
+                                         .FirstOrDefaultAsync(a => a.Id == user.AddressId.Value);
+            if (address != null)
+            {
+                // Hantera adressdata här om nödvändigt
+            }
+        }
     }
 
     private async Task OnValidSubmitAsync()
@@ -57,7 +69,7 @@
             var setPhoneResult = await UserManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
             if (!setPhoneResult.Succeeded)
             {
-
+                // Hantera fel här
             }
         }
 
@@ -71,3 +83,17 @@
         public string? PhoneNumber { get; set; }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
